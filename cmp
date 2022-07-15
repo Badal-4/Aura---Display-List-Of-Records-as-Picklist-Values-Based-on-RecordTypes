@@ -1,0 +1,38 @@
+<aura:component controller="DisplayRecordTypeRecords" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="openmodel" type="boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fetchListOfRecordTypes}"/>
+    <aura:attribute name="lstOfRecordType" type="String[]" />
+    <aura:attribute name="lstOfRecordType1" type="String[]" />
+    <aura:attribute name="selectedRecordvalue" type="String[]" />
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="{}"/>
+    
+    <lightning:button label="share Record" variant="neutral" onclick="{!c.PerformAction}" />
+    
+    
+    <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open slds-modal_small slds-backdrop ">
+        <div class="slds-modal__container ">
+            <div class="slds-modal__header">
+                <h2 class="slds-text-heading--medium">Sharing Records Using Salesforce Lightning</h2>
+                <button class="slds-button slds-modal__close slds-button--icon" title="Close" onclick="{!c.closeModal}">
+                    <lightning:icon iconName="utility:close" size="medium" />
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap " style="height:400px;" >
+                <!--    <force:recordView aura:id="view" recordId="{!v.viewAccId}"/>-->
+                <div class="slds-size--1-of-2 slds-large-size--1-of-2 ">
+                    <Lightning:select aura:id="selectid" label="Select Record Type" onchange="{!c.selectedvalue}">
+                        <aura:iteration items="{!v.lstOfRecordType}" var="account">                            
+                            <ui:inputSelectOption text="{!account}"  label="{!account}" />
+                        </aura:iteration>
+                    </Lightning:select><br/>
+                </div>
+                <Lightning:select aura:id="selectid1" label="Select Record " onchange="{!c.ShowContacts}">
+                    <aura:iteration items="{!v.lstOfRecordType1}" var="acc">                            
+                        <ui:inputSelectOption text="{!acc}" label="{!acc.Name}"  />
+                    </aura:iteration>
+                </Lightning:select>                
+            </div>
+        </div>
+    </div>    
+</aura:component>
